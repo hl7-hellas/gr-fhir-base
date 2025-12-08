@@ -1,0 +1,2 @@
+
+{% include list-capabilitystatements.xhtml %}

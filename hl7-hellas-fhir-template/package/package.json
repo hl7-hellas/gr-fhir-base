@@ -1,0 +1,13 @@
+{
+    "name": "hl7.gr.template",
+    "version": "0.0.1",
+    "type": "fhir.template",
+    "license": "CC0-1.0",
+    "description": "HL7 Hellas template for FHIR based implementation guides",
+    "author": "https://hl7-hellas.gr/",
+    "canonical": "https://hl7-hellas.gr/ig/hl7.gr.template",
+    "base": "fhir.base.template",
+    "dependencies": {
+        "fhir.base.template": "current"
+    }
+}

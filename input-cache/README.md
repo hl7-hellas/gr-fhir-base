@@ -1,0 +1,1 @@
+Download latest FHIR IG publisher from [GitHUb](https://github.com/HL7/fhir-ig-publisher/releases) and put it in this directory.

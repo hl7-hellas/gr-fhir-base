@@ -1,0 +1,76 @@
+id: hl7.fhir.gr.base
+canonical: https://hl7-hellas.gr/fhir/hl7-fhir-gr-base
+fhirVersion: 4.0.1
+
+name: HL7_FHIR_GR_BASE
+title: GR FHIR Base Implementation Guide
+description: This IG defines base line HL7® FHIR®© resources for the Greek context aligned with EU realm
+status: draft
+experimental: true
+date: 2025-12-08
+version: 0.0.1-draft
+copyrightYear: 2025+
+releaseLabel: draft
+publisher:
+  name: HL7 Hellas
+  url: https://hl7-hellas.gr/
+contact:
+  - name: HL7 Hellas
+    telecom:
+      - system: url
+        value: https://hl7-hellas.gr/
+license: CC0-1.0
+jurisdiction: urn:iso:std:iso:3166#GR
+
+extension:
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm
+    valueInteger: 0
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
+    valueCode: draft
+
+dependencies:
+  hl7.fhir.eu.base: 0.1.0
+
+pages:
+  index.md:
+    title: Home
+  background.md:
+    title: Background
+  use-cases.md:
+    title: Use cases
+  capability-statements.md:
+    title: Capability statements
+  downloads.md:
+    title: Downloads
+  support.md:
+    title: Support
+  glossary.md:
+    title: Glossary
+
+menu:
+  Home: index.html
+  Background: background.html
+  Use cases: use-cases.html
+  Specification:
+    Artifacts: artifacts.html
+    Capability statements: capability-statements.html
+  Downloads: downloads.html
+  Support: support.html
+  Glossary: glossary.html
+  Table of content: toc.html
+
+parameters:
+  i18n-default-lang: en
+  # include all for publishing, exclude for faster build time
+  excludexml: false
+  excludejson: false
+  excludettl: false
+  excludemap: false
+  validation: [allow-any-extensions, no-broken-links]
+  show-inherited-invariants: true
+  usage-stats-opt-out: true
+
+instanceOptions:
+  setMetaProfile: always
+  setId: standalone-only
+  manualSliceOrdering: true

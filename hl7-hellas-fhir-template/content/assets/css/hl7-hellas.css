@@ -1,0 +1,18 @@
+:root {
+	--link-color:#428bca;
+
+	--ig-header-color:#f5f5f5;
+	--ig-header-container-color:#ffffff;
+
+	--stripe-bg-color: #232323;
+	--navbar-bg-color: #003291;
+	--btn-hover-color: #357ebd;
+	--btn-active-color: #357ebd;
+
+	--btn-text-color: #e6e6e6;
+
+	--footer-bg-color: #232323;
+
+	--footer-container-bg-color: #003291;
+	--footer-container-color: #232323;
+}
