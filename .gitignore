@@ -1,5 +1,6 @@
 # Auto generated directories and files #
 ########################################
+_preprocessed
 fsh-generated
 input-cache/schemas
 input-cache/txcache
@@ -9,8 +10,8 @@ output
 temp
 template
 translations
-hl7-hellas-template/**/.index.db
-hl7-hellas-template/**/.index.json
+hl7-hellas-fhir-template/**/.index.db
+hl7-hellas-fhir-template/**/.index.json
 
 #              IDE's files             #
 ########################################

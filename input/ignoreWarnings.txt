@@ -4,5 +4,14 @@
 # (And include comments like this justifying why)
 # See https://github.com/FHIR/sample-ig/blob/master/input/ignoreWarnings.txt for examples
 
-# AMKA assigner id is valid but it's not resolvable
+# This is not controlled by this IG, therefore it is not solvable by IG
+Reference to experimental CodeSystem http://hl7.org/fhir/guide-parameter-code|5.0.0
+
+# AMKA assigner id is valid, but it's not resolvable
 No definition could be found for URL value 'urn:oid:2.16.840.1.113883.2.25.3.4.1.1.2'
+
+# Extension uses deprecated http://hl7.org/fhir/StructureDefinition/regex|5.2.0
+The extension http://hl7.org/fhir/StructureDefinition/regex|5.2.0 is deprecated%
+
+# FHIR 5.0.0 uses deprecated http://hl7.org/fhir/ValueSet/jurisdiction: 5.0.0 while the current FHIR build version uses http://terminology.hl7.org/ValueSet/jurisdiction: 1.0.0
+Reference to deprecated ValueSet http://hl7.org/fhir/ValueSet/jurisdiction|5.0.0

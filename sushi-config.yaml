@@ -1,14 +1,14 @@
-id: hl7.fhir.gr.base
-canonical: https://hl7-hellas.gr/fhir/hl7-fhir-gr-base
-fhirVersion: 4.0.1
-
-name: HL7_FHIR_GR_BASE
-title: GR FHIR Base Implementation Guide
-description: This IG defines base line HL7® FHIR®© resources for the Greek context aligned with EU realm
+id: hl7.fhir.gr.base-and-core-r5
+canonical: https://hl7-hellas.gr/fhir/hl7-fhir-gr-base-and-core-r5
+fhirVersion: 5.0.0
+name: HL7_FHIR_GR_BASE_AND_CORE
+title: GR FHIR Base and Core Implementation Guide
+description: This IG defines base and core HL7® FHIR®© profiles for the Greek context aligned with EU realm
 status: draft
 experimental: true
 date: 2025-12-08
 version: 0.0.1-draft
+copyright: HL7 Hellas
 copyrightYear: 2025+
 releaseLabel: draft
 publisher:
@@ -29,7 +29,7 @@ extension:
     valueCode: draft
 
 dependencies:
-  hl7.fhir.eu.base: 0.1.0
+  hl7.fhir.eu.base-r5: 0.1.0
 
 pages:
   index.md:
@@ -46,9 +46,12 @@ pages:
     title: Support
   glossary.md:
     title: Glossary
+  changes.md:
+    title: Change log
 
 menu:
   Home: index.html
+  Table of content: toc.html
   Background: background.html
   Use cases: use-cases.html
   Specification:
@@ -57,7 +60,7 @@ menu:
   Downloads: downloads.html
   Support: support.html
   Glossary: glossary.html
-  Table of content: toc.html
+  Change log: changes.html
 
 parameters:
   i18n-default-lang: en
@@ -74,3 +77,17 @@ instanceOptions:
   setMetaProfile: always
   setId: standalone-only
   manualSliceOrdering: true
+
+groups:
+  GrBase:
+    name: HL7 Hellas base profiles
+    description: Base profiles for the Greece
+    resources:
+      - StructureDefinition/base-greek-patient
+      - Patient/Base-Example-Patient
+  GrCore:
+    name: HL7 Hellas case profiles
+    description: Core profiles for the Greece
+    resources:
+      - StructureDefinition/core-greek-patient
+      - Patient/Core-Example-Patient
