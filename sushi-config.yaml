@@ -38,6 +38,8 @@ pages:
     title: Background
   use-cases.md:
     title: Use cases
+  logical-models.md:
+    title: Logical models
   capability-statements.md:
     title: Capability statements
   downloads.md:
@@ -55,6 +57,7 @@ menu:
   Background: background.html
   Use cases: use-cases.html
   Specification:
+    Logical models: logical-models.html
     Artifacts: artifacts.html
     Capability statements: capability-statements.html
   Downloads: downloads.html
@@ -83,11 +86,21 @@ groups:
     name: HL7 Hellas base profiles
     description: Base profiles for the Greece
     resources:
-      - StructureDefinition/base-greek-patient
-      - Patient/Base-Example-Patient
+      - StructureDefinition/patient-base
+      - Patient/Patient-With-Amka
   GrCore:
-    name: HL7 Hellas case profiles
+    name: HL7 Hellas core profiles
     description: Core profiles for the Greece
     resources:
-      - StructureDefinition/core-greek-patient
-      - Patient/Core-Example-Patient
+      - StructureDefinition/greek-patient
+      - Patient/George-Papadopoulos
+      - Patient/No-Name-Patient
+  Models:
+    name: HL7 Hellas logical models
+    description: Logical models for the Greece
+    resources:
+      - StructureDefinition/GreekIdentifier
+      - StructureDefinition/GreekHumanName
+      - StructureDefinition/GreekAddress
+      - StructureDefinition/GreekContactPoint
+      - StructureDefinition/GreekPatient

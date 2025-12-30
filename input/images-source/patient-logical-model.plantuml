@@ -1,0 +1,98 @@
+@startuml
+!theme materia-outline
+skinparam classAttributeIconSize 0
+hide empty members
+hide circle
+'left to right direction
+
+entity Patient {
+  identifiers: Identifier[]
+  names: HumanName[]
+  dateOfBirth: Date
+  gender: Gender
+  addresses: Address[]
+  contactPoints: ContactPoint[]
+}
+
+entity Identifier {
+  type: Code
+  authority: String
+  value: String
+}
+
+entity HumanName {
+  text: String
+  family: String
+  given: String
+  fatherName: String
+}
+
+entity ContactPoint {
+  use: Code
+  type: Code
+  value: String
+}
+
+entity Address {
+  use: Code
+  text: String
+  streetName: String
+  houseNumber: String
+  city: String
+  postalCode: String
+  country: Code
+}
+
+enum Gender {
+  FEMALE
+  MALE
+  UNKNOWN
+}
+
+enum IdentifierType {
+  PASSPORT
+  MEDICAL_RECORD
+  EMPLOYER
+  TAX_ID
+  NATIONAL_INSURANCE_ID
+  PROVIDER
+  MEDICAL_LICENSE
+  SOCIAL_BENEFICIARY_ID
+}
+
+enum ContactPointUse {
+	HOME
+	WORK
+	OLD
+}
+
+enum ContactPointType {
+	PHONE
+	EMAIL
+}
+
+enum AddressUse {
+	HOME
+	WORK
+	OLD
+}
+
+enum AddressCountry {
+	GR "Greece"
+	CY "Cyprus"
+	MK "North Macedonia"
+	AL "Albania"
+  ...
+}
+
+Patient::identifiers -- Identifier
+Patient::names -- HumanName
+Patient::gender -- Gender
+Patient::addresses -- Address
+Patient::contactPoints -- ContactPoint
+Identifier::type -- IdentifierType
+ContactPoint::use -- ContactPointUse
+ContactPoint::type -- ContactPointType
+Address::use -- AddressUse
+Address::country -- AddressCountry
+@enduml
