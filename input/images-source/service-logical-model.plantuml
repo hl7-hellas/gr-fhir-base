@@ -1,0 +1,68 @@
+@startuml
+!theme materia-outline
+skinparam classAttributeIconSize 0
+hide empty members
+hide circle
+'left to right direction
+
+entity Service {
+  identifier: Identifier
+  name: String
+  category: Code
+  type: Code
+  address: Address
+  contacts: Contact[]
+  provider: Provider
+}
+
+entity Identifier {
+  type: <b><color:#1B7DCB>FILLER ID</color></b>
+  issuer: String
+  value: String
+}
+
+entity Contact {
+  use: <b><color:#1B7DCB>WORK</color></b>
+  type: Code
+  value: String
+}
+
+enum ServiceCategory {
+  DIAGNOSTIC PROCEDURES
+  IMAGING DIAGNOSTIC METHODS
+  SURGICAL PROCEDURES
+  NON-SURGICAL THERAPEUTIC PROCEDURES
+  OTHER PROCEDURES
+  ...
+}
+
+enum ServiceType {
+  MAGNETIC ANGIOGRAPHY
+  RADIOISOTOPIC CYSTOGRAM
+  BIOPSIES NEPHROSTOMIES
+  CT SCAN
+  ...
+}
+
+entity Address {
+  text: String
+  use: <b><color:#1B7DCB>WORK</color></b>
+  streetName: String
+  houseNumber: String
+  city: String
+  postalCode: String
+  country: <b><color:#1B7DCB>GREECE</color></b>
+}
+
+enum ContactType {
+	PHONE
+	EMAIL
+}
+
+Service::identifier "1" -- "1" Identifier
+Service::category "1" -- "1" ServiceCategory
+Service::type "1" -- "1" ServiceType
+Service::address "1" -- "1" Address
+Service::contacts "1" -- "1..*" Contact
+Contact::type "1" -- "1" ContactType
+@enduml

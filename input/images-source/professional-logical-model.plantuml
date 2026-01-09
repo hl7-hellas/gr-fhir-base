@@ -5,13 +5,13 @@ hide empty members
 hide circle
 'left to right direction
 
-entity Patient {
+entity Professional {
   identifiers: Identifier[]
-  names: Name[]
-  dateOfBirth: Date
+  name: Name
   gender: Code
   addresses: Address[]
   contacts: Contact[]
+  specialties: Code[]
 }
 
 entity Identifier {
@@ -28,69 +28,52 @@ entity Name {
 }
 
 entity Contact {
-  use: Code
+  use: <b><color:#1B7DCB>WORK</color></b>
   type: Code
   value: String
 }
 
+enum Specialty {
+  GENERAL/FAMILY MEDICINE
+  CARDIOLOGY
+  PEDIATRICS
+  RADIOLOGY
+  ...
+}
+
 entity Address {
   text: String
-  use: Code
+  use: <b><color:#1B7DCB>WORK</color></b>
   streetName: String
   houseNumber: String
   city: String
   postalCode: String
-  country: Code
+  country: <b><color:#1B7DCB>GREECE</color></b>
 }
 
 enum Gender {
   FEMALE
   MALE
-  UNKNOWN
 }
 
 enum IdentifierType {
-  PASSPORT NUMBER
-  MEDICAL RECORD NUMBER
-  TAX ID
-  NATIONAL INSURANCE ID
-  SOCIAL BENEFICIARY ID
+  EMPLOYER NUMBER
+  PROVIDER NUMBER
+  MEDICAL LICENSE NUMBER
   ...
-}
-
-enum ContactUse {
-  HOME
-  WORK
-  OLD
 }
 
 enum ContactType {
-  PHONE
-  EMAIL
+	PHONE
+	EMAIL
 }
 
-enum AddressUse {
-  HOME
-  WORK
-  OLD
-}
-
-enum Country {
-  GREECE
-  CYPRUS
-  NORTH MACEDONIA
-  ALBANIA
-  ...
-}
-
-Patient::identifiers "1" -- "1..*" Identifier
-Patient::names "1" -- "1..*" Name
-Patient::gender "1" -- "1" Gender
-Patient::addresses "1" -- "1..*" Address
-Patient::contacts "1" -- "1..*" Contact
+Professional::identifiers "1" -- "1..*" Identifier
+Professional::name "1" -- "1" Name
+Professional::gender "1" -- "1" Gender
+Professional::addresses "1" -- "1..*" Address
+Professional::contacts "1" -- "1..*" Contact
+Professional::specialties "1" -- "1..*" Specialty
 Identifier::type "1" -- "1" IdentifierType
-Contact::use "1" -- "1" ContactUse
 Contact::type "1" -- "1" ContactType
-Address::use "1" -- "1" AddressUse
-Address::country "1" -- "1" Country
 @enduml

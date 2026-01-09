@@ -9,4 +9,26 @@
 </figure>
 <br clear="all"/>
 
-## Practitioner
+## Professional
+
+<figure class="diagram">
+  {% include professional-logical-model.svg %}
+  <figcaption>Professional logical model</figcaption>
+</figure>
+<br clear="all"/>
+
+## Provider
+
+<figure class="diagram">
+  {% include provider-logical-model.svg %}
+  <figcaption>Provider logical model</figcaption>
+</figure>
+<br clear="all"/>
+
+## Service
+
+<figure class="diagram">
+  {% include service-logical-model.svg %}
+  <figcaption>Service logical model</figcaption>
+</figure>
+<br clear="all"/>

@@ -1,0 +1,59 @@
+@startuml
+!theme materia-outline
+skinparam classAttributeIconSize 0
+hide empty members
+hide circle
+'left to right direction
+
+entity Provider {
+  identifier: Identifier
+  name: String
+  type: Code
+  address: Address
+  contacts: Contact[]
+  parent: Provider
+}
+
+entity Identifier {
+  type: <b><color:#1B7DCB>PROVIDER</color></b>
+  issuer: String
+  value: String
+}
+
+entity Contact {
+  use: <b><color:#1B7DCB>WORK</color></b>
+  type: Code
+  value: String
+}
+
+enum ProviderType {
+  PRIMARY HEALTH CARE UNIT
+  MUNICIPAL CLINIC
+  REGIONAL CLINIC
+  DAY CARE UNIT
+  HOSPITAL
+  ...
+}
+
+entity Address {
+  text: String
+  use: <b><color:#1B7DCB>WORK</color></b>
+  streetName: String
+  houseNumber: String
+  city: String
+  postalCode: String
+  country: <b><color:#1B7DCB>GREECE</color></b>
+}
+
+enum ContactType {
+	PHONE
+	EMAIL
+}
+
+Provider::identifier "1" -- "1" Identifier
+Provider::type "1" -- "1" ProviderType
+Provider::address "1" -- "1" Address
+Provider::contacts "1" -- "1..*" Contact
+Provider::parent "1" -- "1" Provider
+Contact::type "1" -- "1" ContactType
+@enduml
