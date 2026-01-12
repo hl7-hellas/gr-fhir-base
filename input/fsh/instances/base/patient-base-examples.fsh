@@ -1,7 +1,7 @@
 Instance: Patient-With-Amka
 InstanceOf: Patient_Base
-Title: "Patient example: Greek base with AMKA"
-Description: "An example of Greek base recommendations for Patient resource."
+Title: "Patient record example, with AMKA"
+Description: "An example of Patient record with AMKA, Greek base recommendations"
 Usage: #example
 * id = "Patient-With-Amka"
 * meta.profile[0] = Canonical(Patient_Base)
@@ -24,8 +24,5 @@ Usage: #example
 * multipleBirthInteger = 1
 * multipleBirthInteger.extension[multiBirthTotal].url = "http://hl7.org/fhir/StructureDefinition/patient-multipleBirthTotal"
 * multipleBirthInteger.extension[multiBirthTotal].valuePositiveInt = 2
-//* contact ^short = "TBD"
 * communication.language = urn:ietf:bcp:47#el-GR
 * communication.language.text = "Greek (Greece)"
-//* generalPractitioner ^short = "TBD"
-//* managingOrganization ^short = "TBD"

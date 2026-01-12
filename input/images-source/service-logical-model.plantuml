@@ -3,28 +3,27 @@
 skinparam classAttributeIconSize 0
 hide empty members
 hide circle
-'left to right direction
 
 entity Service {
-  identifier: Identifier
-  name: String
+  <b>identifier</b>: Identifier
+  <b>name</b>: String
+  <b>type</b>: Code
   category: Code
-  type: Code
   address: Address
   contacts: Contact[]
-  provider: Provider
+  <b>provider</b>: Provider
 }
 
 entity Identifier {
-  type: <b><color:#1B7DCB>FILLER ID</color></b>
-  issuer: String
-  value: String
+  <b>value</b>: String
+  <b>issuer</b>: String
+  type: <b><i><color:#1B7DCB>#FILLER ID</color></i></b>
 }
 
 entity Contact {
-  use: <b><color:#1B7DCB>WORK</color></b>
+  <b>value</b>: String
   type: Code
-  value: String
+  use: <b><i><color:#1B7DCB>#WORK</color></i></b>
 }
 
 enum ServiceCategory {
@@ -45,13 +44,13 @@ enum ServiceType {
 }
 
 entity Address {
-  text: String
-  use: <b><color:#1B7DCB>WORK</color></b>
+  <b>text</b>: String
+  use: <b><i><color:#1B7DCB>#WORK</color></i></b>
   streetName: String
   houseNumber: String
   city: String
   postalCode: String
-  country: <b><color:#1B7DCB>GREECE</color></b>
+  country: <b><i><color:#1B7DCB>#GREECE</color></i></b>
 }
 
 enum ContactType {
@@ -60,9 +59,9 @@ enum ContactType {
 }
 
 Service::identifier "1" -- "1" Identifier
-Service::category "1" -- "1" ServiceCategory
+Service::category "1" -- "0..1" ServiceCategory
 Service::type "1" -- "1" ServiceType
-Service::address "1" -- "1" Address
-Service::contacts "1" -- "1..*" Contact
-Contact::type "1" -- "1" ContactType
+Service::address "1" -- "0..1" Address
+Service::contacts "1" -- "0..*" Contact
+Contact::type "1" -- "0..1" ContactType
 @enduml

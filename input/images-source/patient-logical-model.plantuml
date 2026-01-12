@@ -6,35 +6,35 @@ hide circle
 'left to right direction
 
 entity Patient {
-  identifiers: Identifier[]
-  names: Name[]
-  dateOfBirth: Date
-  gender: Code
+  <b>identifiers</b>: Identifier[]
+  <b>names</b>: Name[]
+  <b>dateOfBirth</b>: Date
+  <b>gender</b>: Code
   addresses: Address[]
   contacts: Contact[]
 }
 
 entity Identifier {
+  <b>value</b>: String
+  <b>issuer</b>: String
   type: Code
-  issuer: String
-  value: String
 }
 
 entity Name {
-  text: String
+  <b>text</b>: String
   family: String
   given: String
   fatherName: String
 }
 
 entity Contact {
-  use: Code
+  <b>value</b>: String
   type: Code
-  value: String
+  use: Code
 }
 
 entity Address {
-  text: String
+  <b>text</b>: String
   use: Code
   streetName: String
   houseNumber: String
@@ -86,11 +86,11 @@ enum Country {
 Patient::identifiers "1" -- "1..*" Identifier
 Patient::names "1" -- "1..*" Name
 Patient::gender "1" -- "1" Gender
-Patient::addresses "1" -- "1..*" Address
-Patient::contacts "1" -- "1..*" Contact
-Identifier::type "1" -- "1" IdentifierType
-Contact::use "1" -- "1" ContactUse
-Contact::type "1" -- "1" ContactType
-Address::use "1" -- "1" AddressUse
-Address::country "1" -- "1" Country
+Patient::addresses "1" -- "0..*" Address
+Patient::contacts "1" -- "0..*" Contact
+Identifier::type "1" -- "0..1" IdentifierType
+Contact::use "1" -- "0..1" ContactUse
+Contact::type "1" -- "0..1" ContactType
+Address::use "1" -- "0..1" AddressUse
+Address::country "1" -- "0..1" Country
 @enduml

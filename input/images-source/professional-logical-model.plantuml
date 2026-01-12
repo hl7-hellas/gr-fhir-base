@@ -3,34 +3,33 @@
 skinparam classAttributeIconSize 0
 hide empty members
 hide circle
-'left to right direction
 
 entity Professional {
-  identifiers: Identifier[]
-  name: Name
+  <b>identifiers</b>: Identifier[]
+  <b>name</b>: Name
   gender: Code
   addresses: Address[]
   contacts: Contact[]
-  specialties: Code[]
+  <b>specialties</b>: Code[]
 }
 
 entity Identifier {
+  <b>value</b>: String
+  <b>issuer</b>: String
   type: Code
-  issuer: String
-  value: String
 }
 
 entity Name {
-  text: String
+  <b>text</b>: String
   family: String
   given: String
   fatherName: String
 }
 
 entity Contact {
-  use: <b><color:#1B7DCB>WORK</color></b>
+  <b>value</b>: String
   type: Code
-  value: String
+  use: <b><i><color:#1B7DCB>#WORK</color></i></b>
 }
 
 enum Specialty {
@@ -42,18 +41,19 @@ enum Specialty {
 }
 
 entity Address {
-  text: String
-  use: <b><color:#1B7DCB>WORK</color></b>
+  <b>text</b>: String
+  use: <b><i><color:#1B7DCB>#WORK</color></i></b>
   streetName: String
   houseNumber: String
   city: String
   postalCode: String
-  country: <b><color:#1B7DCB>GREECE</color></b>
+  country: <b><i><color:#1B7DCB>#GREECE</color></i></b>
 }
 
 enum Gender {
   FEMALE
   MALE
+  <del>UNKNOWN</del>
 }
 
 enum IdentifierType {
@@ -71,9 +71,9 @@ enum ContactType {
 Professional::identifiers "1" -- "1..*" Identifier
 Professional::name "1" -- "1" Name
 Professional::gender "1" -- "1" Gender
-Professional::addresses "1" -- "1..*" Address
-Professional::contacts "1" -- "1..*" Contact
+Professional::addresses "1" -- "0..*" Address
+Professional::contacts "1" -- "0..*" Contact
 Professional::specialties "1" -- "1..*" Specialty
-Identifier::type "1" -- "1" IdentifierType
-Contact::type "1" -- "1" ContactType
+Identifier::type "1" -- "0..1" IdentifierType
+Contact::type "1" -- "0..1" ContactType
 @enduml

@@ -3,11 +3,10 @@
 skinparam classAttributeIconSize 0
 hide empty members
 hide circle
-'left to right direction
 
 entity Provider {
-  identifier: Identifier
-  name: String
+  <b>identifier</b>: Identifier
+  <b>name</b>: String
   type: Code
   address: Address
   contacts: Contact[]
@@ -15,15 +14,15 @@ entity Provider {
 }
 
 entity Identifier {
-  type: <b><color:#1B7DCB>PROVIDER</color></b>
-  issuer: String
-  value: String
+  <b>value</b>: String
+  <b>issuer</b>: String
+  type: <b><i><color:#1B7DCB>#PROVIDER NUMBER</color></i></b>
 }
 
 entity Contact {
-  use: <b><color:#1B7DCB>WORK</color></b>
+  <b>value</b>: String
   type: Code
-  value: String
+  use: <b><i><color:#1B7DCB>#WORK</color></i></b>
 }
 
 enum ProviderType {
@@ -37,12 +36,12 @@ enum ProviderType {
 
 entity Address {
   text: String
-  use: <b><color:#1B7DCB>WORK</color></b>
+  use: <b><i><color:#1B7DCB>#WORK</color></i></b>
   streetName: String
   houseNumber: String
   city: String
   postalCode: String
-  country: <b><color:#1B7DCB>GREECE</color></b>
+  country: <b><i><color:#1B7DCB>#GREECE</color></i></b>
 }
 
 enum ContactType {
@@ -51,9 +50,9 @@ enum ContactType {
 }
 
 Provider::identifier "1" -- "1" Identifier
-Provider::type "1" -- "1" ProviderType
-Provider::address "1" -- "1" Address
-Provider::contacts "1" -- "1..*" Contact
-Provider::parent "1" -- "1" Provider
-Contact::type "1" -- "1" ContactType
+Provider::type "1" -- "0..1" ProviderType
+Provider::address "1" -- "0..1" Address
+Provider::contacts "1" -- "0..*" Contact
+Provider::parent "1" -- "0..1" Provider
+Contact::type "1" -- "0..1" ContactType
 @enduml

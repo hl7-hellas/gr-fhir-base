@@ -6,8 +6,8 @@ Expression: "(family.exists() and given.exists()) or text.exists() or extension(
 Profile: Greek_Patient
 Parent: Patient_Base
 Id: greek-patient
-Title: "Patient: Greek core requirements"
-Description: "Greek core requirements for Patient resource"
+Title: "Patient profile: Greek core requirements"
+Description: "Greek core requirements"
 * ^experimental = false
 * insert fmm-and-status(0, draft)
 

@@ -56,8 +56,8 @@ menu:
   Table of content: toc.html
   Background: background.html
   Use cases: use-cases.html
+  Logical models: logical-models.html
   Specification:
-    Logical models: logical-models.html
     Artifacts: artifacts.html
     Capability statements: capability-statements.html
   Downloads: downloads.html
@@ -95,12 +95,16 @@ groups:
       - StructureDefinition/greek-patient
       - Patient/George-Papadopoulos
       - Patient/No-Name-Patient
+      - Patient/No-Structured-Name-Patient
   Models:
     name: HL7 Hellas logical models
     description: Logical models for the Greece
     resources:
-      - StructureDefinition/GreekIdentifier
-      - StructureDefinition/GreekHumanName
-      - StructureDefinition/GreekAddress
-      - StructureDefinition/GreekContactPoint
       - StructureDefinition/GreekPatient
+      - StructureDefinition/GreekProfessional
+      - StructureDefinition/GreekProvider
+      - StructureDefinition/GreekService
+      - StructureDefinition/GreekIdentifier
+      - StructureDefinition/GreekName
+      - StructureDefinition/GreekAddress
+      - StructureDefinition/GreekContact

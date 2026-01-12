@@ -7,11 +7,11 @@ Expression: "value.matches('[0-9]{11}')"
 Profile: Patient_Base
 Parent: Patient
 Id: patient-base
-Title: "Patient: Greek base recommendations"
+Title: "Patient profile: Greek base recommendations"
 Description: """
-Greek base recommendations for Patient resource.
+Greek base recommendations for Patient profile.
 
-The patient resource shall be compliant with EU and Greek base recommendations, and record/provide:
+The patient profile shall be compliant with EU and Greek base recommendations, and record/provide:
 
 - place of birth (via extension)
 - identifier
