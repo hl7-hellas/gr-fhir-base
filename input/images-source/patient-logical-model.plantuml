@@ -21,7 +21,7 @@ entity Identifier {
 }
 
 entity Name {
-  <b>text</b>: String
+  text: String
   family: String
   given: String
   fatherName: String
@@ -34,7 +34,7 @@ entity Contact {
 }
 
 entity Address {
-  <b>text</b>: String
+  text: String
   use: Code
   streetName: String
   houseNumber: String

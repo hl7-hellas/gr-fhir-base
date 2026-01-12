@@ -20,7 +20,7 @@ entity Identifier {
 }
 
 entity Name {
-  <b>text</b>: String
+  text: String
   family: String
   given: String
   fatherName: String
@@ -41,7 +41,7 @@ enum Specialty {
 }
 
 entity Address {
-  <b>text</b>: String
+  text: String
   use: <b><i><color:#1B7DCB>#WORK</color></i></b>
   streetName: String
   houseNumber: String

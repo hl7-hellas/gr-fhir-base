@@ -24,5 +24,3 @@ Usage: #example
 * multipleBirthInteger = 1
 * multipleBirthInteger.extension[multiBirthTotal].url = "http://hl7.org/fhir/StructureDefinition/patient-multipleBirthTotal"
 * multipleBirthInteger.extension[multiBirthTotal].valuePositiveInt = 2
-* communication.language = urn:ietf:bcp:47#el-GR
-* communication.language.text = "Greek (Greece)"
