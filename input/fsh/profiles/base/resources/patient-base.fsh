@@ -1,8 +1,12 @@
-Invariant: amka-identifier
-Description: "AMKA is 11 digits identifier"
-Severity: #error
-// @TODO: Find other way to constraint AMKA, the extension http://hl7.org/fhir/StructureDefinition/regex|5.2.0 is deprecated
-Expression: "value.matches('[0-9]{11}')"
+Invariant: gr-pat-base-name
+Description: "given and family, or text SHOULD be present"
+Severity: #warning
+Expression: "(family.exists() and given.exists()) or text.exists()"
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Invariant: gr-pat-base-address
+Description: "line, city and postalCode, or text SHOULD be present"
+Severity: #warning
+Expression: "(line.exists() and city.exists() and postalCode.exists()) or text.exists()"
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Profile: Patient_Base
 Parent: Patient
@@ -11,15 +15,17 @@ Title: "Patient profile: Greek base recommendations"
 Description: """
 Greek base recommendations for Patient profile.
 
-The patient profile shall be compliant with EU and Greek base recommendations, and record/provide:
+The patient record shall be compliant with EU and Greek base recommendations, and records/provides:
 
+- text, as a human interpretable/readable summary
 - place of birth (via extension)
-- identifier
-- full name and father's and mother's names (via extensions)
+- identifier(s)
+- name(s) and father's and mother's names (via extensions)
+- telecom(s): contact information
 - gender
 - birthdate (and time, via extension)
-- address
-- multiple births indicator, indicating which one in order was patient (indicating that patient has tween sibling(s)) and how many has been born
+- address(es)
+- multiple births indicator, indicating which one in order was patient (indicating that patient has tween sibling(s)) and how many has been born (via extension)
 
 ___to be discussed:___
 
@@ -31,49 +37,63 @@ ___to be discussed:___
 * ^experimental = false
 * insert fmm-and-status(0, draft)
 
-* insert should-not-be-populated(implicitRules)
-* insert should-not-be-populated(language)
+// Resource:
+// id, meta, implicitRules, language
 
+// DomainResource:
 * text 0..1
 * text ^short = "Human interpretable summary of the resource SHOULD be provided"
-* insert should-not-be-populated(contained)
+// contained
 * ^extension[SDImposeProfile][0].valueCanonical = Canonical(PatientEu)
 // PatBirthPlace http://hl7.org/fhir/StructureDefinition/patient-birthPlace
 * extension contains PatBirthPlace named birthPlace 0..1
 * extension[birthPlace] ^short = "The place of birth of the patient SHOULD be recorded/provided and it SHOULD contain at least city and postal code if known. If the information is not available as structured elements, the 'text' element could be used."
-* insert should-not-be-populated(modifierExtension)
+* extension[birthPlace].valueAddress.city 1..1
+* extension[birthPlace].valueAddress.city ^short = "The city of birth of the patient SHOULD be recorded/provided"
+* extension[birthPlace].valueAddress.postalCode 1..1
+* extension[birthPlace].valueAddress.postalCode ^short = "The postal code of birth of the patient SHOULD be recorded/provided"
+// modifierExtension
+
+// Patient resource:
 * identifier 1..*
-* identifier ^short = "Patient identifiers used in healthcare processes providing accurate patient and patient record identity. Patient identifiers SHALL contain at least an AMKA identifier"
-* insert should-not-be-populated(active)
+* identifier ^short = "Patient identifiers used in healthcare processes providing accurate patient and patient record identity. Patient identifiers SHOULD contain at least one ant it SHOULD be an AMKA identifier"
+* identifier.value 1..1
+* identifier.value ^short = "The actual value of an identifier SHALL be provided"
+* identifier.system 1..1
+* identifier.system ^short = "The issue of an identifier SHALL be provided, otherwise the identifier can't be unique across settings"
+// active
 * name 1..*
-* name ^short = "Name of a patient containing parts of the full name. Surname and family name parts SHOULD be recorded/provided without abbreviation or as initials"
-* name only HumanName_Base
-* telecom 0..*
-* telecom ^short  = "Patient's contact information"
-* telecom.system 0..1
+* name ^short = "Name of a patient containing parts of the full name SHALL be provided. Surname and family name parts SHOULD be recorded/provided without abbreviation or as initials"
+* name obeys gr-pat-base-name
+* name.text 0..1
+* name.text ^short  = "Patient's full name containing father's name SHOULD be recorded/provided. The full name as it SHOULD be presented/displayed to human reader."
+* name.family 0..1
+* name.family ^short = "Patient's family name without abbreviation or as initials"
+* name.family.extension contains FathersFamily named fatherName 0..1 // http://hl7.org/fhir/StructureDefinition/humanname-fathers-family
+* name.family.extension[fatherName] ^short = "Patient's name in Greece SHOULD record/provide father's name if known"
+* name.family.extension contains MothersFamily named motherName 0..1 // http://hl7.org/fhir/StructureDefinition/humanname-mothers-family
+* name.family.extension[motherName] ^short = "Patient's mother name SHOULD be recorded/provided if known"
+* name.given 0..*
+* name.given ^short = "Patient's given (first) name without abbreviation or as initials"
 * telecom.value 1..1
-* telecom.use 0..1
-* insert should-not-be-populated(telecom.rank)
-* insert should-not-be-populated(telecom.period)
+* telecom.value ^short = "The actual value of contact information SHOULD be provided"
 * gender 1..1
 * gender ^short = "Patient gender for administration and record keeping purposes SHALL be recorded/provided"
 * birthDate 1..1
 * birthDate ^short  = "Patient's date of birth SHALL be recorded/provided"
-// PatBirthTime https://build.fhir.org/ig/HL7/fhir-extensions/StructureDefinition-patient-birthTime.html
-* birthDate.extension contains PatBirthTime named birthTime 0..1
+* birthDate.extension contains PatBirthTime named birthTime 0..1 // https://build.fhir.org/ig/HL7/fhir-extensions/StructureDefinition-patient-birthTime.html
 * birthDate.extension[birthTime] ^short = "Patient's birth time, (required in Neonatology) to complement birthDate providing precision, SHOULD be recorded/provided if known"
-* insert should-not-be-populated(deceased[x])
-
-* address ^short = "TBD"
-
-* insert should-not-be-populated(maritalStatus)
-* multipleBirth[x] ^short = "Patient was born with siblings. The value SHOULD be recorder and it SHOULD use boolean for negative or an integer for positive, representing order of birth: 1 for the 1st born, 2 for the 2nd born, etc."
-// PatMultipleBirthTotal http://hl7.org/fhir/StructureDefinition/patient-multipleBirthTotal
-* multipleBirth[x].extension contains PatMultipleBirthTotal named multiBirthTotal 0..1
-* multipleBirth[x].extension[multiBirthTotal] ^short = "Number of patient's siblings at multiple birth time. If multipleBirth records/provides an integer, this SHOULD be populated"
-* insert should-not-be-populated(photo)
-* insert should-not-be-populated(contact)
-* insert should-not-be-populated(communication)
-* insert should-not-be-populated(generalPractitioner)
-* insert should-not-be-populated(managingOrganization)
-* insert should-not-be-populated(link)
+// deceased[x]
+* address 0..*
+* address ^short = "Address of a patient SHALL provide either street name and house number, city, and postal code parts, or text be presented/displayed to human reader"
+* address obeys gr-pat-base-address
+// maritalStatus
+* multipleBirth[x] ^short = "If patient was born with siblings, the value SHOULD be recorded"
+* multipleBirth[x].extension contains PatMultipleBirthTotal named multiBirthTotal 0..1 // http://hl7.org/fhir/StructureDefinition/patient-multipleBirthTotal
+* multipleBirth[x].extension[multiBirthTotal] ^short = "Number of patient's siblings born at the same birth time"
+// photo
+// contact
+// communication
+// generalPractitioner
+// managingOrganization
+// link

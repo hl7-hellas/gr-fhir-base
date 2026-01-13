@@ -1,28 +1,44 @@
-Invariant: gr-pat-name
+Invariant: gr-pat-core-id-amka
+Description: "AMKA is 11 digits identifier"
+Severity: #error
+// @TODO: Find other way to constraint AMKA, the extension http://hl7.org/fhir/StructureDefinition/regex|5.2.0 is deprecated
+Expression: "value.matches('[0-9]{11}')"
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Invariant: gr-pat-core-name
 Description: "given and family, or text, or a data-absent-reason extension SHALL be present"
 Severity: #error
 Expression: "(family.exists() and given.exists()) or text.exists() or extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()"
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Invariant: gr-pat-core-address
+Description: "line, city and postalCode, or a data-absent-reason extension SHALL be present"
+Severity: #error
+Expression: "(line.exists() and city.exists() and postalCode.exists()) or text.exists() or extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()"
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Profile: Greek_Patient
 Parent: Patient_Base
 Id: greek-patient
 Title: "Patient profile: Greek core requirements"
-Description: "Greek core requirements"
+Description: """
+Greek core requirements for Patient profile.
+
+The patient record shall be compliant with EU and Greek core requirements, and records/provides:
+"""
+
 * ^experimental = false
 * insert fmm-and-status(0, draft)
 
+// Resource:
+// id, meta, implicitRules, language
+
+// DomainResource:
+* text 1..1 MS
+* text ^short = "Human interpretable summary of the resource SHALL be provided"
+// contained
 * ^extension[SDImposeProfile][0].valueCanonical = Canonical(PatientEuCore)
+// modifierExtension
 
-// http://hl7.org/fhir/StructureDefinition/patient-birthPlace
-* extension[birthPlace] 1..1 MS
-* extension[birthPlace] ^short = "The place of birth of the patient"
-* extension[birthPlace] ^definition = "Birth address is of Address datatype"
-* extension[birthPlace] ^requirements = "Patient's birth address SHALL be recorded/provided and it SHALL contain at least city and postal code if known. If the information is not available as structured elements, the 'text' element could be used."
-
-* identifier 1..* MS
-* identifier ^short = "Patient identifiers"
-* identifier ^definition = "Patient identifiers used in healthcare processes providing accurate patient and patient record identity"
-* identifier ^requirements = "Patient identifiers SHALL contain at least an AMKA identifier"
+// Patient resource:
+* identifier ^short = "Patient identifiers used in healthcare processes providing accurate patient and patient record identity. Patient identifiers SHALL contain at least an AMKA identifier"
 * identifier
   * ^slicing.discriminator[0].type = #value
   * ^slicing.discriminator[=].path = "type"
@@ -31,7 +47,7 @@ Description: "Greek core requirements"
   * ^slicing.rules = #open
 * identifier contains amka 1..1 MS
 * identifier[amka] ^short = "AMKA is required identifier"
-* identifier[amka] obeys amka-identifier
+* identifier[amka] obeys gr-pat-core-id-amka
 * identifier[amka].use 1..1 MS
 * identifier[amka].use ^short = "AMKA is an official identity"
 * identifier[amka].use = #official
@@ -43,56 +59,21 @@ Description: "Greek core requirements"
 * identifier[amka].system = $AMKA-SYS
 * identifier[amka].value 1..1 MS
 * identifier[amka].value ^short = "11 digits identifier"
-
 * name 1..* MS
-* name ^short = "Patient name(s)"
-* name ^definition = "Name of a patient containing parts of the full name"
-* name ^requirements = "Given (first) name and family name (surname) parts SHALL be recorded/provided without abbreviation or as initials"
-* name obeys gr-pat-name
-* name.text 0..1 MS
-* name.text ^short = "Patient's full name"
-* name.text ^definition = "Patient's full name containing father's name"
-* name.text ^requirements = "The full name as it SHALL be presented/displayed to human reader. This SHALL be provided"
-* name.given 0..* MS
-* name.given ^short = "Patient's given name"
-* name.given ^definition = "Patient's given (first) name"
-* name.given ^requirements = "Patient's given (first) name without abbreviation or as initials"
-* name.family 0..1 MS
-* name.family ^short = "Patient's family name"
-* name.family ^definition = "Patient's family name (surname)"
-* name.family ^requirements = "Patient's family name without abbreviation or as initials"
-* name.family.extension[fatherName] 0..1 MS
-* name.family.extension[fatherName] ^short = "Patient's father name"
-* name.family.extension[fatherName] ^definition = "Patient's name in Greece usually contains fathers name"
-* name.family.extension[fatherName] ^requirements = "Patient's father name SHALL be recorded/provided"
-// DataAbsentReason http://hl7.org/fhir/StructureDefinition/data-absent-reason
-* name.extension contains DataAbsentReason named dataAbsentReason 0..1
-* name.extension[dataAbsentReason] ^short = "Reason for missing Patient's name"
-* name.extension[dataAbsentReason] ^definition = "Reason for missing Patient's name"
-* name.extension[dataAbsentReason] ^requirements = "If patient's name is missing, the reason for missing SHOULD be recorded/provided"
-
-* gender 1..1
-* gender ^short = "Patient gender"
-* gender ^definition = "Patient gender for administration and record keeping purposes: https://hl7.org/fhir/patient.html#gender"
-* gender ^requirements = "Patient's gender SHALL be recorded/provided"
-
-* address ^short = "TBD"
-* maritalStatus ^short = "TBD"
-
-* multipleBirth[x] 0..1 MS
-* multipleBirth[x] only integer
-* multipleBirth[x] ^short = "Patient was born with siblings"
-* multipleBirth[x] ^definition = "If patient was part of a multiple birth this information SHALL be recorded/provided"
-* multipleBirth[x] ^requirements = "The value used SHALL be boolean for negative or an integer for positive, representing order of birth: 1 for the 1st born, 2 for the 2nd born, etc."
-
-* multipleBirthInteger.extension[multiBirthTotal] 0..1 MS
-
-* contact ^short = "TBD"
-
-* communication.language 1..1 MS
-* communication.language ^short = "Language used (spoken/understood) by patient"
-* communication.language ^definition = "Language appropriate for communication with patient because the patient is using it."
-* communication.language ^requirements = "Patient communication language SHALL be recorded/provided if it is not Greek language"
-
-* generalPractitioner ^short = "TBD"
-* managingOrganization ^short = "TBD"
+* name ^short = "Name of a patient containing parts of the full name. Given (first) name and family name (surname) parts SHALL be recorded/provided without abbreviation or as initials"
+* name obeys gr-pat-core-name
+* name.extension contains DataAbsentReason named dataAbsentReason 0..1 // http://hl7.org/fhir/StructureDefinition/data-absent-reason
+* name.extension[dataAbsentReason] ^short = "Reason for missing patient's name. If patient's name is missing, the reason for missing SHALL be recorded/provided"
+//telecom inherited from Base
+* address 1..* MS
+* address ^short = "Address of a patient SHALL provide either street name and house number, city, and postal code parts, or text be presented/displayed to human reader"
+* address obeys gr-pat-core-address
+* address.extension contains DataAbsentReason named dataAbsentReason 0..1 // http://hl7.org/fhir/StructureDefinition/data-absent-reason
+* address.extension[dataAbsentReason] ^short = "Reason for missing patient's address. If patient's address is missing, the reason for missing SHALL be recorded/provided"
+// multipleBirth[x] inherited from Base
+// photo
+// contact
+// communication
+// generalPractitioner
+// managingOrganization
+// link

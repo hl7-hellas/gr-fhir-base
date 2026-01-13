@@ -94,7 +94,7 @@ groups:
     resources:
       - StructureDefinition/greek-patient
       - Patient/George-Papadopoulos
-      - Patient/No-Name-Patient
+      - Patient/No-Name-No-Address-Patient
       - Patient/No-Structured-Name-Patient
   Models:
     name: HL7 Hellas logical models
