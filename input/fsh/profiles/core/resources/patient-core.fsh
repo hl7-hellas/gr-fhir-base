@@ -12,7 +12,7 @@ Expression: "(family.exists() and given.exists()) or text.exists() or extension(
 Invariant: gr-pat-core-address
 Description: "line, city and postalCode, or a data-absent-reason extension SHALL be present"
 Severity: #error
-Expression: "(line.exists() and city.exists() and postalCode.exists()) or text.exists() or extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()"
+Expression: "((line.exists() and city.exists() and postalCode.exists()) or text.exists()) or extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()"
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Profile: Greek_Patient
 Parent: Patient_Base
@@ -66,7 +66,7 @@ _TBD_
 * name obeys gr-pat-core-name
 * name.extension contains DataAbsentReason named dataAbsentReason 0..1 // http://hl7.org/fhir/StructureDefinition/data-absent-reason
 * name.extension[dataAbsentReason] ^short = "Reason for missing patient's name. If patient's name is missing, the reason for missing SHALL be recorded/provided"
-//telecom inherited from Base
+// telecom inherited from Base
 * address 1..* MS
 * address ^short = "Address of a patient SHALL provide either street name and house number, city, and postal code parts, or text be presented/displayed to human reader"
 * address obeys gr-pat-core-address

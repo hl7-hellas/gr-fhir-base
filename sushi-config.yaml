@@ -84,21 +84,25 @@ instanceOptions:
 groups:
   GrBase:
     name: HL7 Hellas base profiles
-    description: Base profiles for the Greece
+    description: Base profiles for Greece
     resources:
       - StructureDefinition/patient-base
       - Patient/With-Amka
+      - StructureDefinition/practitioner-base
+      - Practitioner/With-MedLic
   GrCore:
     name: HL7 Hellas core profiles
-    description: Core profiles for the Greece
+    description: Core profiles for Greece
     resources:
       - StructureDefinition/greek-patient
       - Patient/George-Papadopoulos
       - Patient/No-Name-No-Address
       - Patient/No-Structured-Name
+      - StructureDefinition/greek-practitioner
+      - Practitioner/Ioannis-Papageorgiou
   Models:
     name: HL7 Hellas logical models
-    description: Logical models for the Greece
+    description: Logical models for Greece
     resources:
       - StructureDefinition/GreekPatient
       - StructureDefinition/GreekProfessional

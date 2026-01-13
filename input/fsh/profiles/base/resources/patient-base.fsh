@@ -56,7 +56,7 @@ ___to be discussed:___
 
 // Patient resource:
 * identifier 1..*
-* identifier ^short = "Patient identifiers used in healthcare processes providing accurate patient and patient record identity. Patient identifiers SHOULD contain at least one ant it SHOULD be an AMKA identifier"
+* identifier ^short = "Patient identifiers used in healthcare processes providing accurate patient and patient record identity. Patient identifiers SHOULD contain at least one and it SHOULD be an AMKA identifier"
 * identifier.value 1..1
 * identifier.value ^short = "The actual value of an identifier SHALL be provided"
 * identifier.system 1..1

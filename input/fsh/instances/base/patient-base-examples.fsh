@@ -20,11 +20,7 @@ Usage: #example
 * name.family.extension[fatherName].valueString = "Ὀρφεύς"
 * name.family.extension[motherName].valueString = "Εὐρυδίκη"
 * gender = #male
-* address.use = #home
-* address.line = "Αλ. Συμεωνίδη 2"
-* address.city = "Θεσσαλονίκη"
-* address.postalCode = "546 39"
-* address.country = #GR
+* address.text = "Αλ. Συμεωνίδη 2, Θεσσαλονίκη 546 39"
 * birthDate = "1960-12-15"
 * birthDate.extension[birthTime].url = "http://hl7.org/fhir/StructureDefinition/patient-birthTime"
 * birthDate.extension[birthTime].valueDateTime = "1960-12-15T16:45:00+02:00"

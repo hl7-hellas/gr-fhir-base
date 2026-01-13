@@ -46,10 +46,11 @@ Usage: #example
 * identifier[amka].type = http://terminology.hl7.org/CodeSystem/v2-0203#NIIP "National Insurance Payor Identifier (Payor)"
 * identifier[amka].system = "urn:oid:2.16.840.1.113883.2.25.3.4.1.1.2"
 * identifier[amka].value = "60121599819"
-* name.text = "Temporarily Unknown"
+* name.text = "Name is unknown"
 * name.extension[dataAbsentReason].url = "http://hl7.org/fhir/StructureDefinition/data-absent-reason"
 * name.extension[dataAbsentReason].valueCode = #temp-unknown "Temporarily Unknown"
 * gender = #male
+* address.text = "Address is unknown"
 * address.extension[dataAbsentReason].url = "http://hl7.org/fhir/StructureDefinition/data-absent-reason"
 * address.extension[dataAbsentReason].valueCode = #temp-unknown "Temporarily Unknown"
 * birthDate = "1960-12-15"
