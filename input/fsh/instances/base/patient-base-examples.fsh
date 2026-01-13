@@ -1,11 +1,11 @@
-Instance: Patient-With-Amka
+Instance: With-Amka
 InstanceOf: Patient_Base
 Title: "Patient record example, with AMKA"
 Description: "An example of Patient record with AMKA, Greek base recommendations"
 Usage: #example
 * text.status = #generated
 * text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h1>Γεώργιος (Ὀρφεύς) Παπαδόπουλος, male</h1><table><tr><td>AMKA</td><td>60121599819</td></tr><tr><td>Born</td><td>1960-12-15 @ 16:45 in Αθήνα, 105 51</td></tr><tr><td>Address</td><td>Αλ. Συμεωνίδη 2, Θεσσαλονίκη 546 39</td></tr><tr><td>Additional</td><td>1st born out of 2 multiple births</td></tr></table></div>"
-* id = "Patient-With-Amka"
+* id = "With-Amka"
 * meta.profile[0] = Canonical(Patient_Base)
 * meta.profile[+] = Canonical(PatientEu)
 * extension[birthPlace].valueAddress.city = "Αθήνα"

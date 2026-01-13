@@ -87,15 +87,15 @@ groups:
     description: Base profiles for the Greece
     resources:
       - StructureDefinition/patient-base
-      - Patient/Patient-With-Amka
+      - Patient/With-Amka
   GrCore:
     name: HL7 Hellas core profiles
     description: Core profiles for the Greece
     resources:
       - StructureDefinition/greek-patient
       - Patient/George-Papadopoulos
-      - Patient/No-Name-No-Address-Patient
-      - Patient/No-Structured-Name-Patient
+      - Patient/No-Name-No-Address
+      - Patient/No-Structured-Name
   Models:
     name: HL7 Hellas logical models
     description: Logical models for the Greece
