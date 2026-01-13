@@ -22,6 +22,8 @@ Description: """
 Greek core requirements for Patient profile.
 
 The patient record shall be compliant with EU and Greek core requirements, and records/provides:
+
+_TBD_
 """
 
 * ^experimental = false
